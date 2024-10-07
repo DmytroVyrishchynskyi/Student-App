@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Student {
     private int rating;
@@ -53,5 +54,31 @@ public class Student {
     public String toString() {
         return "Student Name: " + name + ", Rating: " + rating;
     }
-}
 
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Student[] students = new Student[3];
+
+        for (int i = 0; i < 3; i++) {
+            System.out.println("Enter name of student " + (i + 1) + ":");
+            String name = scanner.nextLine();
+            students[i] = new Student(name);
+            System.out.println("Enter rating of student " + (i + 1) + ":");
+            int rating = scanner.nextInt();
+            students[i].setRating(rating);
+            scanner.nextLine();
+        }
+
+        double averageRating = Student.getAvgRating();
+        System.out.println("Average rating of all students: " + averageRating);
+
+        System.out.println("Enter the index of the student whose rating you want to change (0-2):");
+        int index = scanner.nextInt();
+        System.out.println("Enter new rating for " + students[index].getName() + ":");
+        int newRating = scanner.nextInt();
+        students[index].changeRating(newRating);
+
+        averageRating = Student.getAvgRating();
+        System.out.println("New average rating of all students: " + averageRating);
+    }
+}
